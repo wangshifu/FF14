@@ -7,6 +7,7 @@
 	</head>
 	<link href="mini/themes/default/miniui.css" rel="stylesheet" type="text/css" />
 	<link href="mini/themes/icons.css" rel="stylesheet" type="text/css" />
+	<link href="mini/portal/js/portal.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="mini/jquery-1.6.2.min.js"></script>
 	<script type="text/javascript" src="mini/miniui.js"></script>
 	<script type="text/javascript" src="js/items.js" ></script>
@@ -15,6 +16,7 @@
 	<script type="text/javascript" src="js/job.js"></script>
 	<script type="text/javascript" src="js/store+json2.min.js"></script>
 	<script type="text/javascript" src="js/dostore.js" ></script>
+	<script type="text/javascript" src="mini/portal/js/Portal.js" ></script>
 	<style type="text/css">
 		.trees {}
 		
@@ -83,48 +85,38 @@
 							<!--<a class="mini-button" iconCls="icon-addnew" plain="true" onclick="" >Loading by Json</a>-->
 						</div>
 				        <div class="mini-fit" style=" " >
-				        	<ul id="maintree1" class="mini-tree"  iconField="img" imgField="img" imgPath="" expandOnDblClick="false" expandOnNodeClick="false" onnodecheck="checkNode2" onnodedblclick="minusItem" onnodeclick="test1" style="width:100%;padding:5px;" showTreeIcon="true" textField="text" idField="id" showCheckBox="false" resultAsTree="false">
+				        	<ul id="maintree1" class="mini-tree"  iconField="img" imgField="img" imgPath="" expandOnDblClick="false" expandOnNodeClick="false" onnodecheck="checkNode2" onnodedblclick="minusItem" style="width:100%;padding:5px;" showTreeIcon="true" textField="text" idField="id" showCheckBox="false" resultAsTree="false">
 							</ul>
 				        </div>
 				    </div>
 				    <div showCollapseButton="false" style="border: none; overflow-x: hidden; overflow-y: auto;">
-				        
-				        <div class="mini-panel" title="基础材料<!--Basics material-->" iconCls="icon-add" style="width:240px; padding: 5px; margin-left:10px ; float: left;" showToolbar="true" showCollapseButton="true" showFooter="false">
-							<div id="eeeeeeeeeeee">
+				        <div id="mandiv1">
+				        </div>
+							<div id="div_Basics">
 								<ul id="maintree10" class="mini-tree" iconField="img" imgField="img" onnodecheck="" style="width:100%;padding:5px;" showTreeIcon="true" textField="text" idField="id" showCheckBox="false" resultAsTree="false">
 								</ul>
 							</div>
-						</div>
-						<div class="mini-panel" title="直接材料<!--Direct material-->" iconCls="icon-add" style="width:240px; padding: 5px; margin-left:10px ; float: left;" showToolbar="true" showCollapseButton="true" showFooter="false">
-							<div id="eeeeeeeeeeee">
+							<div id="div_Direct">
 								<ul id="maintree2" class="mini-tree" iconField="img" imgField="img" style="width:100%;padding:5px;" showTreeIcon="true" textField="text" idField="id" showCheckBox="true" resultAsTree="false">
 								</ul>
 							</div>
-						</div>
-						<div class="mini-panel" title="成品材料<!--Finished Product-->" iconCls="icon-add" style="width:240px; padding: 5px; margin-left:10px ; float: left;" showToolbar="true" showCollapseButton="true" showFooter="false">
-							<div id="eeeeeeeeeeee">
+							<div id="div_Finished">
 								<ul id="maintree6" class="mini-tree" iconField="img" imgField="img" style="width:100%;padding:5px;" showTreeIcon="true" textField="text" idField="id" showCheckBox="true" resultAsTree="false">
 								</ul>
 							</div>
-						</div>
-						<div class="mini-panel" title="二级材料<!--Second materia-->" iconCls="icon-add" style="width:240px; padding: 5px; margin-left:10px ; float: left;" showToolbar="true" showCollapseButton="true" showFooter="false">
-							<div id="ffffffffffff">
+							<div id="div_Second">
 								<ul id="maintree3" class="mini-tree" iconField="img" imgField="img" onnodecheck="" style="width:100%;padding:5px;" showTreeIcon="true" textField="text" idField="id" showCheckBox="false" resultAsTree="false">
 								</ul>
 							</div>
-						</div>
-						<div class="mini-panel" title="三级材料<!--Third materia-->" iconCls="icon-add" style="width:240px; padding: 5px; margin-left:10px ; float: left;" showToolbar="true" showCollapseButton="true" showFooter="false">
-							<div id="ggggggg">
+							<div id="div_Third">
 								<ul id="maintree4" class="mini-tree" iconField="img" imgField="img" onnodecheck="" style="width:100%;padding:5px;" showTreeIcon="true" textField="text" idField="id" showCheckBox="false" resultAsTree="false">
 								</ul>
 							</div>
-						</div>
-						<div class="mini-panel" title="四级材料<!--Fourth materia-->" iconCls="icon-add" style="width:240px; padding: 5px; margin-left:10px ; float: left;" showToolbar="true" showCollapseButton="true" showFooter="false">
-							<div id="hhhhhhhhh">
+							<div id="div_Fourth">
 								<ul id="maintree5" class="mini-tree" iconField="img" imgField="img" onnodecheck="" style="width:100%;padding:5px;" showTreeIcon="true" textField="text" idField="id" showCheckBox="false" resultAsTree="false">
 								</ul>
 							</div>
-						</div>
+						
 				    </div>        
 				</div>
 			</div>
@@ -145,7 +137,7 @@
 			var maintree5 = mini.get("maintree5");
 			var maintree6 = mini.get("maintree6");
 			
-			var pubimg = "http://i1.17173cdn.com/ap2fes/YWxqaGBf/images/itemicon/93/933b35f07b3006396ba00269babfd9a77437b845.png"
+			var pubimg = "img/AAAAABJRU5ErkJggg.png"
 			var treeObjs = []; //待生产列表
 			var treeObjsID = {}; //待生产列表
 			var treeObj10 = [{id: "t00001",	text: "基础材料", children: [], expanded: true ,img: pubimg}]; //应准备列表
@@ -156,6 +148,23 @@
 			var treeObj5 = [{id: "t00005", text: "四级材料",children: [], expanded: true ,img: pubimg}];
 			var treeObj6 = [{id: "t00006", text: "成品材料",children: [], expanded: true ,img: pubimg}];
 			var temItems = null;
+			
+			var portal = new mini.ux.Portal();
+			portal.set({
+		        style: "width: 100%;",
+		        columns: [235, 235, 235, 235]
+		    });
+		    portal.render(document.getElementById("mandiv1"));
+		    
+		    portal.setPanels([
+		        { column: 0, id: "p1", title: "基础材料", showCloseButton: false, body: "#div_Basics", height: "auto" },
+		        { column: 1, id: "p2", title: "直接材料", showCloseButton: false, body: "#div_Direct", height: "auto" },
+		        
+		        { column: 2, id: "p3", title: "成品材料", showCloseButton: false, body: "#div_Finished", height: "auto" },
+		        { column: 3, id: "p4", title: "二级材料", showCloseButton: false, body: "#div_Second", height: "auto" },
+		        { column: 3, id: "p5", title: "三级材料", showCloseButton: false, body: "#div_Third", height: "auto" },
+		        { column: 3, id: "p6", title: "四级材料", showCloseButton: false, body: "#div_Fourth", height: "auto" }
+		    ]);
 			
 			maintree1.on("drawnode",function(e){
 				var nodeType = e.row.nodeType;
@@ -343,7 +352,8 @@
 			 * @param {Object} e
 			 */
 			function minusItem(e){
-				//console.log(e);
+				ChangeNo();
+				/*//console.log(e);
 				var row = e.row;
 				if(treeObjsID[row.id]){
 					//console.log("数组存在id "+row.id);
@@ -354,7 +364,7 @@
 					}
 				}
 				//console.log(treeObjsID);
-				updateTree();
+				updateTree();*/
 			}
 			
 			function setCookie(name,value)
