@@ -60,6 +60,8 @@
 		<div title="历史缓存记录" region="east" width="250">
 			<div property="toolbar" >
 				<a class="mini-button"  plain="true" style="float: right;" onclick="deleteItem()" iconCls="icon-remove">删除记录<!--delete Item--></a>
+				<a class="mini-button"  plain="true" style="float: right;" onclick="outputJson()" iconCls="icon-save">导出<!--delete Item--></a>
+				<a class="mini-button"  plain="true" style="float: right;" onclick="inputByJson()" iconCls="icon-save">导入<!--delete Item--></a>
 			</div>
 			<div id="hisListDiv">
 				<ul id="hisListTree" class="mini-tree" onnodedblclick="loadhis"  style="width:100%;padding:5px;" showTreeIcon="false" textField="text" idField="id" showCheckBox="false" resultAsTree="false">
@@ -124,6 +126,7 @@
 			</div>
 		</div>
 	</div>
+	<!--<textarea ></textarea>-->
 		<!--
 		
 		-->
@@ -277,6 +280,69 @@
 		                } 
 		            }
 		        );
+			}
+			
+			function inputByJson(){
+				mini.prompt("请输入", "导入",
+		            function (action, value) {
+		                if (action == "ok") {
+		                    var objec;
+		                    try{
+		                    	objec = mini.decode(value);
+		                    }catch(e){
+		                    	alert("解析失败!");
+		                    	console.log("输入的json字符串解析错误！");
+		                    }
+		                    if(objec){
+		                    	//console.log("导入成功")
+		                    	try{
+		                    		if(objec.text && objec.id && objec.object && objec.storeId){
+		                    			console.log("数据符合要求！")
+		                    			var saveList = store.get('saveList');
+										if(!saveList){
+											saveList = {};
+										}
+										saveList[objec.storeId] = objec;
+										store.set('saveList',saveList);
+										showList();
+		                    		}else{
+		                    			alert("数据格式错误！")
+		                    		}
+		                    	}catch(e){
+		                    		alert("数据格式错误！")
+		                    	}
+		                    }
+		                } 
+		            },true
+		        );
+			}
+			
+			/**
+			 * 
+			 */
+			function outputJson(){
+				
+				var temNode = hisListTree.getSelectedNode();
+				if(temNode){
+					//console.log(temNode)
+					var storeId= temNode.storeId;
+					var saveList = store.get('saveList');
+					//console.log(saveList)
+					//mini.alert();
+					var html = "<textarea style=\"width: 100%; height: 100px;\">" +  mini.encode(saveList[storeId]) +"</textarea>";
+					mini.showMessageBox({
+			            width: 350,
+			            title: "导出",
+			            buttons: ["ok"],
+			            message: "把如下字符串复制粘贴保存到其他地方即可",
+			            html: html,
+			            showModal: false
+			           
+			        });
+				}else{
+					console.log("未选中");
+					mini.alert("请选择要导出的历史记录！");
+				}
 			}
 			
 			/**
